@@ -1,4 +1,4 @@
-﻿namespace ECS.Legacy
+﻿namespace ECSLegacy
 {
     public class Application
     {

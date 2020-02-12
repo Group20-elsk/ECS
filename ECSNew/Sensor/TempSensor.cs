@@ -1,9 +1,8 @@
 ﻿using System;
-using ECSNew;
 
-namespace ECS.Legacy
+namespace ECSNew
 {
-    internal class TempSensor : ISensor
+    public class TempSensor : ISensor
     {
         private Random gen = new Random();
 

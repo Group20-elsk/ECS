@@ -1,6 +1,6 @@
 ﻿using ECSNew;
 
-namespace ECS.Legacy
+namespace ECSNew
 {
     public class ECS
     {
