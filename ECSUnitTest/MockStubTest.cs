@@ -1,42 +1,52 @@
 ﻿using System;
 using NUnit.Framework;
 using ECSNew;
+using NSubstitute;
 
 namespace ECSUnitTest
 {
     [TestFixture]
-    public class UnitTest1
+    public class MockStubTest
     {
         private int _thr;
-        private ISensor _fakeSensor;
-        private IHeater _fakeHeater;
+        private FakeSensor25deg _fakeSensor;
+        private FakeHeater _fakeHeater;
+
+        //private IHeater _fakeHeater1;
+
         private ECS UUT;
 
 
         [SetUp]
         public void Setup()
         {
-            _thr = 1;
+            _thr = 35;
             _fakeHeater = new FakeHeater();
             _fakeSensor = new FakeSensor25deg();
+
+            //_fakeHeater1 = Substitute.For<IHeater>();
+
             UUT = new ECS(_thr,_fakeSensor,_fakeHeater);
         }
 
 
         [Test]
-        public void TestMethod1()
+        public void Test_TurnOn_Called_1()
         {
-            
+            UUT.Regulate();
+
+            Assert.That(_fakeHeater.TurnedOn, Is.EqualTo(1));
         }
     }
 
+    //Stub
     public class FakeSensor25deg : ISensor
     {
-        public int testRun { get; private set; }
+        //public int testRun { get; private set; }
 
         public FakeSensor25deg()
         {
-            testRun = 0;
+            //testRun = 0;
         }
 
         public int GetTemp()
@@ -46,11 +56,13 @@ namespace ECSUnitTest
 
         public bool RunSelfTest()
         {
-            testRun++;
+            //testRun++;
             return true;
         }
     }
 
+
+    //Mock
     public class FakeHeater : IHeater
     {
         public int TurnedOn { get; private set; }
