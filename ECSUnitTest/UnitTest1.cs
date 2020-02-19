@@ -1,6 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 using ECSNew;
+using NSubstitute;
 
 namespace ECSUnitTest
 {
@@ -11,6 +12,7 @@ namespace ECSUnitTest
         private ISensor _fakeSensor;
         private IHeater _fakeHeater;
         private ECS UUT;
+        
 
 
         [SetUp]
@@ -24,9 +26,15 @@ namespace ECSUnitTest
 
 
         [Test]
-        public void TestMethod1()
+        public void TestWithSub()
         {
+            var sub = Substitute.For<ISensor>(); //Create substitute, indeholder inddirekte "new" 
             
+            UUT.SetThreshold(60);
+
+            sub
+                .GetTemp();
+
         }
     }
 
