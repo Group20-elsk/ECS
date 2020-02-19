@@ -41,9 +41,23 @@ namespace ECSUnitTest
 
                 //Assert
                 _fakeHeater.Received(1).TurnOn();//fakeHeater fungerer som en mock i denne test
-
-
             }
+
+            [TestCase(1,1)]
+            [TestCase(4,4)]
+            [TestCase(-10,-10)]
+            public void TestWith(int th, int result)//State based test
+            {
+                //setup
+                UUT.SetThreshold(th);
+
+                //Act
+                int threshold = UUT.GetThreshold();
+
+                //Assert
+                Assert.That(threshold,Is.EqualTo(result));
+            }
+
         }
     }
 }
